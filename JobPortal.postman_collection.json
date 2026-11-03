@@ -1,0 +1,535 @@
+{
+	"info": {
+		"_postman_id": "7a3e8c9b-6b21-4f18-bcf3-94c653d9e801",
+		"name": "JobPortal REST API Collection",
+		"description": "Production Postman collection for JobPortal Spring Boot 3 REST API. Includes pre-filled JSON payloads and pre-configured Basic Authentication for both Job Seeker and Job Poster roles.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Authentication",
+			"description": "User registration, login, and profile endpoints",
+			"item": [
+				{
+					"name": "Register New Seeker",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pooja Verma\",\n  \"email\": \"pooja.verma@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"SEEKER\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new job seeker account."
+					},
+					"response": []
+				},
+				{
+					"name": "Register New Poster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Global Talent HR\",\n  \"email\": \"hr@globaltalent.com\",\n  \"password\": \"password123\",\n  \"role\": \"POSTER\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new recruiter/poster account."
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Seeker",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"seeker@jobportal.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with default demo Seeker credentials."
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Poster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"poster@jobportal.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login with default demo Poster credentials."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Profile (Me)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "seeker@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me"
+							]
+						},
+						"description": "Get profile of the currently logged-in user."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Job Seeker",
+			"description": "Endpoints accessible by candidates (Browse, Apply, Track)",
+			"item": [
+				{
+					"name": "Get All Jobs (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs"
+							]
+						},
+						"description": "Fetch all open job listings. Publicly accessible."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Job by ID (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs",
+								"1"
+							]
+						},
+						"description": "Get detailed job specification by Job ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Apply for Job 1",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "seeker@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"applicantName\": \"Shailja Sharma\",\n  \"resumeUrl\": \"https://linkedin.com/in/shailja-sharma\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs/1/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs",
+								"1",
+								"apply"
+							]
+						},
+						"description": "Submit application for Job 1. Pre-configured with Seeker credentials."
+					},
+					"response": []
+				},
+				{
+					"name": "View My Applications",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "seeker@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/applications/my",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"applications",
+								"my"
+							]
+						},
+						"description": "View all applications submitted by the logged-in seeker."
+					},
+					"response": []
+				},
+				{
+					"name": "Track Application by Reference (Public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/applications/track/APP-2026-6310",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"applications",
+								"track",
+								"APP-2026-6310"
+							]
+						},
+						"description": "Track application status using generated reference code (Public)."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Job Poster",
+			"description": "Endpoints for recruiters (Post Jobs, Manage Candidates, Delete)",
+			"item": [
+				{
+					"name": "Post a New Job",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "poster@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"postProfile\": \"Senior Full Stack Engineer\",\n  \"postDesc\": \"Develop scalable microservices with Spring Boot, Java 21, and modern React.\",\n  \"reqExperience\": 4,\n  \"postTechStack\": [\n    \"Java\",\n    \"Spring Boot\",\n    \"PostgreSQL\",\n    \"React\",\n    \"Docker\",\n    \"Kubernetes\"\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs"
+							]
+						},
+						"description": "Create a new job post. Pre-configured with Poster credentials."
+					},
+					"response": []
+				},
+				{
+					"name": "View My Posted Jobs",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "poster@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs/my-posted",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs",
+								"my-posted"
+							]
+						},
+						"description": "List all jobs created by the logged-in poster."
+					},
+					"response": []
+				},
+				{
+					"name": "View Applicants for Job 1",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "poster@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs/1/applications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs",
+								"1",
+								"applications"
+							]
+						},
+						"description": "View all candidates who applied to Job 1 (Owner only)."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Application Status (Shortlist)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "poster@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"SHORTLISTED\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/applications/6/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"applications",
+								"6",
+								"status"
+							]
+						},
+						"description": "Update candidate status: APPLIED, UNDER_REVIEW, SHORTLISTED, REJECTED."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Job 7",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "poster@jobportal.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/jobs/7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"jobs",
+								"7"
+							]
+						},
+						"description": "Delete a job posting (Owner only)."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
