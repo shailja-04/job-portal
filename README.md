@@ -1,6 +1,6 @@
 # JobPortal — Spring Boot REST API Backend
 
-[![Java CI/CD Pipeline](https://github.com/shailja/job-portal/actions/workflows/ci.yml/badge.svg)](https://github.com/shailja/job-portal/actions/workflows/ci.yml)
+[![Java CI/CD Pipeline](https://github.com/shailja-04/job-portal/actions/workflows/ci.yml/badge.svg)](https://github.com/shailja-04/job-portal/actions/workflows/ci.yml)
 ![Java](https://img.shields.io/badge/Java-21-orange.svg)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue.svg)
